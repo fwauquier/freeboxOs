@@ -5,7 +5,7 @@
 
 namespace FreeboxOs;
 
-public   class JsonModel {
+public class JsonModel {
 
 	/// <summary>
 	///     Additional properties

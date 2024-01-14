@@ -6,6 +6,7 @@
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using FreeboxOs.login;
 using Jint;
 using Microsoft.Extensions.Logging;
 
@@ -52,7 +53,7 @@ public sealed partial class Api {
 
 	private LoginInfo? m_LongInfo;
 
-	private async Task EnsureLoginAsync() {
+	public async Task EnsureLoginAsync() {
 		if (m_LongInfo is not null) return;
 		m_LongInfo = await Login().ConfigureAwait(false);
 	}

@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 public sealed class AccessPoint : JsonModel {
 	public string? mac{ get; init; }               // ": "34:27:92:62:0D:6A",

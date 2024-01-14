@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 public sealed class LanBrowserInterface:JsonModel {
 	public required string name { get; init; }

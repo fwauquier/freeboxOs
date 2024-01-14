@@ -1,9 +1,9 @@
-﻿// <copyright>
+// <copyright>
 // Copyright (c) Frederic Wauquier rights reserved.
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-namespace FreeboxOs;
+namespace FreeboxOs.login;
 
 /// <summary>
 /// Status of authorization request

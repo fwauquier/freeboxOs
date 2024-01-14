@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.version;
 
 public sealed class ApiVersion:JsonModel {
     /// <summary>The current API version on the Freebox</summary>

@@ -3,6 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
+using FreeboxOs.version;
 using Microsoft.Extensions.Logging;
 
 namespace FreeboxOs;

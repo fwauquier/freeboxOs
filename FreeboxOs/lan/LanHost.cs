@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 public sealed class LanHost:JsonModel {
 	public AccessPoint? access_point  { get; init; }
@@ -11,7 +11,8 @@ public sealed class LanHost:JsonModel {
 
 	public string? @interface  { get; init; }
 	public string? @default_name  { get; init; }
-	public long? @first_activity  { get; init; }
+	[JsonConverter(typeof(DateTimeConverter))]
+	public DateTime @first_activity  { get; init; }
 	public string? @model  { get; init; }
 
 
@@ -32,11 +33,13 @@ public sealed class LanHost:JsonModel {
 	/// <summary>If true the host can receive traffic from the Freebox </summary>
 	public bool  reachable  { get; init; }
 	/// <summary> Last time the host was reached</summary>
-	public long  last_time_reachable   { get; init; }
+	[JsonConverter(typeof(DateTimeConverter))]
+	public DateTime  last_time_reachable   { get; init; }
 	/// <summary>If true the host sends traffic to the Freebox </summary>
 	public bool active     { get; init; }
 	/// <summary> Last time the host sent traffic</summary>
-	public long  last_activity   { get; init; }
+	[JsonConverter(typeof(DateTimeConverter))]
+	public DateTime  last_activity   { get; init; }
 	/// <summary> List of available names, and their source</summary>
 	public LanHostName[]?  names  { get; init; }
 	/// <summary> List of available layer 3 network connections</summary>

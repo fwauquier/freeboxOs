@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 public sealed class LanHostL3Connectivity:JsonModel {
 	/// <summary> Layer 3 address </summary>

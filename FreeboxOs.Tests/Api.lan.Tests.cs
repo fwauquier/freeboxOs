@@ -10,7 +10,7 @@ namespace FreeboxOs;
 [TestClass]
 public class ApiLanTests {
 	
-	// ReSharper disable once NullableWarningSuppressionIsUsed
+	 
 	public TestContext TestContext { get; set; } = null!;
 
 

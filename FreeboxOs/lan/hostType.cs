@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum hostType {

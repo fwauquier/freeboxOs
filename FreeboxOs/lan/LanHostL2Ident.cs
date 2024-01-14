@@ -3,7 +3,7 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
+namespace FreeboxOs.lan;
 
 public sealed class LanHostL2Ident:JsonModel {
 	/// <summary> Layer 2 id </summary>

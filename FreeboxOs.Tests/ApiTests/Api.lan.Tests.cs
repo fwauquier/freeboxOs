@@ -5,7 +5,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace FreeboxOs;
+namespace FreeboxOs.ApiTests;
 
 [TestClass]
 public class ApiLanTests {

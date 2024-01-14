@@ -15,7 +15,7 @@ public sealed class DhcpDynamicLease : JsonModel {
 	public string? mac { get; init; }
 
 	/// <summary>  hostname matching the mac address </summary>
-	public string? hostname { get; init; }
+	public required string hostname { get; init; }
 
 	/// <summary> IPv4 to assign to the host  </summary>
 	public string? ip { get; init; }

@@ -5,4 +5,8 @@
 
 namespace FreeboxOs.network_control;
 
-public enum ProfileMode { allowed }
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum NetworkControlMode {
+	denied = 0,
+	allowed = 1,
+}

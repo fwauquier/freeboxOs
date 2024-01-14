@@ -3,11 +3,9 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-using System.Net.NetworkInformation;
 using FreeboxOs.lan;
-using FreeboxOs.wifi;
 
-namespace FreeboxOs;
+namespace FreeboxOs.ApiTests;
 
 [TestClass]
 public class Study {
@@ -18,7 +16,7 @@ public class Study {
 	public async Task network_control() {
 		using var api = Settings.GetApi(TestContext);
 		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<NetworkControl[]>("network_control").ConfigureAwait(false);
+		var result = await api.GetAsync<network_control.NetworkControl[]>("network_control").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
 
@@ -38,16 +36,6 @@ public class Study {
 		var result = await api.GetAsync<LanHost[]>("lan/browser/pub").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
-	[TestMethod]
-	public async Task wifi_ap() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("wifi/ap").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
-	
-
-
  
 	[TestMethod]
 	public async Task taskcount() {

@@ -2,9 +2,10 @@
 //    Copyright (c) Frederic Wauquier All rights reserved.
 //    <author >Frederic Wauquier</author>
 // </copyright >
- 
 
-namespace FreeboxOs;
+using FreeboxOs.dhcp;
+
+namespace FreeboxOs.ApiTests;
 
 [TestClass]
 public class ApidhcpTests {
@@ -30,7 +31,7 @@ public class ApidhcpTests {
 		using var api    = Settings.GetApi(TestContext);
 		var       result = await api.DhcpDynamicLease();
 		Assert.IsNotNull(result);
-		foreach (var item in result.OrderBy(i=>i.hostname)) {
+		foreach (var item in result.OrderBy<DhcpDynamicLease, string>(i=>i.hostname)) {
 			TestContext.WriteLine($"{item.hostname} - assign_time:{item.assign_time:s} - refresh_time:{item.refresh_time:s} - lease_remaining:{item.lease_remaining:g}");
 		}
 		result.Dump(TestContext);

@@ -14,5 +14,5 @@ public sealed class BssConfig : JsonModel {
 	public string? key { get; init; }
 	public string? wps_uuid { get; init; }
 	public bool? use_default_config { get; init; }
-	public string? issidd { get; init; }
+	public string? ssid { get; init; }
 }

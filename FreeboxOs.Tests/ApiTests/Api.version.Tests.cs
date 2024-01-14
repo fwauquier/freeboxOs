@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-namespace FreeboxOs;
+namespace FreeboxOs.ApiTests;
 
 [TestClass]
 public class ApiTests {

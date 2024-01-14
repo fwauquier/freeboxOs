@@ -6,3 +6,5 @@
 global using System.Text.Json.Serialization;
 global using System.Text.Json;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using FreeboxOs.Code;
+

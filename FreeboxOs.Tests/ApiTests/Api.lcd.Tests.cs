@@ -3,31 +3,21 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
- 
-
-namespace FreeboxOs;
+namespace FreeboxOs.ApiTests;
 
 [TestClass]
-public class ApiWifiTests {
+public class ApiLcdTests {
 
 	public TestContext TestContext { get; set; } = null!;
 
 
 	[TestMethod]
-	public async Task WifiBss() {
+	public async Task LcdConfig() {
 		using var api    = Settings.GetApi(TestContext);
-		var       result = await api.WifiBss();
+		var       result = await api.LcdConfig();
 		result.Dump(TestContext);
 	}
 
-	[TestMethod]
-	public async Task WifiConfig() {
-		using var api    = Settings.GetApi(TestContext);
-		var       result = await api.WifiConfig();
-		result.Dump(TestContext);
-	}
-
-
-
+ 
 
 }

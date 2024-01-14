@@ -5,7 +5,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace FreeboxOs;
+namespace FreeboxOs.Code;
 
 internal static class Helper {
 	public static readonly JsonSerializerOptions jsonOptionIndented = new JsonSerializerOptions {

@@ -7,7 +7,7 @@ namespace FreeboxOs.lan;
 
 public sealed class LanHost:JsonModel {
 	public AccessPoint? access_point  { get; init; }
-	public NetworkControl? network_control  { get; init; }
+	public LanNetworkControl? network_control  { get; init; }
 
 	public string? @interface  { get; init; }
 	public string? @default_name  { get; init; }
@@ -23,7 +23,7 @@ public sealed class LanHost:JsonModel {
 	/// <summary>When possible, the Freebox will try to guess the host_type, but you can manually override this to the correct value.</summary>
 	public hostType  host_type   { get; set; }
 	/// <summary> If true the primary name has been set manually</summary>
-	public bool primary_name_manual     { get; init; }
+	public bool? primary_name_manual     { get; init; }
 	/// <summary> Layer 2 network id and its type</summary>
 	public LanHostL2Ident?  l2ident   { get; init; }
 	/// <summary>Host vendor name (from the mac address) </summary>

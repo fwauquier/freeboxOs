@@ -9,6 +9,7 @@ public class NullableDateTimeConverter : JsonConverter<DateTime?> {
 	public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
 		try {
 			var int64 = reader.GetInt64();
+			if(int64 == 0) return null;
 			return DateTime.UnixEpoch.AddSeconds(int64).ToLocalTime();
 		} catch (Exception) {
 			return null;

@@ -33,7 +33,7 @@ public sealed partial class Api : IDisposable {
 		                                                           PropertyNamingPolicy = null,
 		                                                           TypeInfoResolver = null,
 		                                                           ReadCommentHandling = JsonCommentHandling.Skip,
-		                                                           UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+		                                                           UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
 		                                                          
 	                                                           };
 
@@ -68,7 +68,18 @@ public sealed partial class Api : IDisposable {
 		try {
 			deserialize = JsonSerializer.Deserialize<Response<T>>(jsonString);
 		} catch (System.Text.Json.JsonException e) {
-			throw new ApiException($"Cannot deserialize response to {typeof(T).FullName}.{ Environment.NewLine }{jsonString}", e);
+
+		 
+			var lines        = jsonString.Split(Environment.NewLine);
+			var iLine        = e.LineNumber?? int.MaxValue;
+			var line         = lines.Length > iLine ? lines[iLine] : string.Empty;
+
+			throw new ApiException($"Cannot deserialize response to {typeof(T).FullName}:{e.Message}"
+			                       + $"{Environment.NewLine}Line: {iLine}"
+			                       + $"{Environment.NewLine}BytePositionInLine: {e.BytePositionInLine}"
+			                       + $"{Environment.NewLine}Path:{e.Path}"
+									+ $"{Environment.NewLine}Line content:{line}"
+			                       + $"{Environment.NewLine}{jsonString}", e);
 		}
 
 #else

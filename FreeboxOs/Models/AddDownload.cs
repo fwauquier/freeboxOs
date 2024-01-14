@@ -6,12 +6,12 @@
 namespace FreeboxOs.Models;
 
 public class AddDownload {
-	public Uri DownloadUrl { get; set; }
-	public List<Uri> DownloadUrls { get; set; }
-	public string DownloadDir { get; set; }
-	public bool Recursive { get; set; }
-	public string Username { get; set; }
-	public string Password { get; set; }
-	public string ArchivePassword { get; set; }
-	public string Cookies { get; set; }
+	public required Uri DownloadUrl { get; init; }
+    public required List<Uri> DownloadUrls { get; init; }
+    public required string DownloadDir { get; init; }
+	public bool Recursive { get; init; }
+    public required string Username { get; init; }
+    public required string Password { get; init; }
+    public required string ArchivePassword { get; init; }
+    public required string Cookies { get; init; }
 }

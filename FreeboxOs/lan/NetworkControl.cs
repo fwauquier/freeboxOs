@@ -6,7 +6,7 @@
 namespace FreeboxOs.Models;
 
 public sealed class NetworkControl : JsonModel {
-		public NetworkControlMode current_mode  { get; init; }
-		public int profile_id  { get; init; }
-		public string name  { get; init; }
+		public required NetworkControlMode current_mode  { get; init; }
+		public required int profile_id  { get; init; }
+		public required string name  { get; init; }
 	}

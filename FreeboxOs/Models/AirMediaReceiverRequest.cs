@@ -10,9 +10,9 @@ public class AirMediaReceiverRequest {
 
 	[JsonPropertyName("media_type")] public MediaType MediaType { get; set; }
 
-	[JsonPropertyName("password")] public string Password { get; set; }
+	[JsonPropertyName("password")] public required string Password { get; set; }
 
 	[JsonPropertyName("position")] public int Position { get; set; }
 
-	[JsonPropertyName("media")] public string Media { get; set; }
+	[JsonPropertyName("media")] public required string Media { get; set; }
 }

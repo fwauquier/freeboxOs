@@ -1,11 +1,10 @@
-﻿// <copyright company = "Frederic Wauquier">
+// <copyright company = "Frederic Wauquier">
 //    Copyright (c) Frederic Wauquier All rights reserved.
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FreeboxOs;
 
@@ -29,14 +28,13 @@ public class Settings {
 	public static Uri uri { get; }
 	public static string app_version { get; }
 
-	public static ILogger GetLogger(TestContext context, string? name = null, LogLevel logLevel = LogLevel.Trace) {
+	public static ILogger GetLogger(TestContext context, string? name = null, LogLevel logLevel = LogLevel.Information) {
 		return new TestContextLogger(context, name ?? typeof(Settings).FullName!, logLevel);
 	}
 
-	public static Api GetApi(TestContext context, bool login = true, LogLevel logLevel = LogLevel.Debug) {
+	public static Api GetApi(TestContext context, LogLevel logLevel = LogLevel.Information) {
 		var server = new Api(uri, password);
 		server.Logger = GetLogger(context, server.GetType().FullName, logLevel);
-
 		return server;
 	}
 
@@ -50,7 +48,9 @@ public class Settings {
 		/// <summary>
 		///     Initializes a new instance of the <see cref="TestContextLogger" /> class.
 		/// </summary>
+		/// <param name="testContext"></param>
 		/// <param name="name">The name of the logger.</param>
+		/// <param name="logLevel"></param>
 		public TestContextLogger(TestContext testContext, string name, LogLevel logLevel = LogLevel.Information) {
 			LogLevel = logLevel;
 			m_TestContext = testContext;
@@ -74,8 +74,7 @@ public class Settings {
 		/// <inheritdoc />
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter) {
 			if (!IsEnabled(logLevel)) return;
-
-			if (formatter is null) throw new NullReferenceException(nameof(formatter));
+			ArgumentNullException.ThrowIfNull(formatter);
 
 			var message = formatter(state, exception);
 
@@ -93,6 +92,7 @@ public class Settings {
 			private NullScope() {
 			}
 
+			// ReSharper disable once ArrangeObjectCreationWhenTypeEvident
 			public static NullScope Singleton { get; } = new();
 
 			/// <inheritdoc />

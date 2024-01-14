@@ -1,0 +1,5 @@
+[*]
+dotnet_diagnostic.ca2007.severity = none # Do not warn about ConfigureAwait(false)
+resharper_use_configure_await_false_highlighting = none # Do not warn about ConfigureAwait(false)
+resharper_nullable_warning_suppression_is_used_highlighting = none # A suppressed nullable warning might hide an underlying problem
+```

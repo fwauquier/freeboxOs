@@ -5,7 +5,7 @@
 
 namespace FreeboxOs;
 
-sealed partial class Api{
+public sealed partial class Api{
 	/*
 	private const string DownloadsPath = "/api/v3/downloads/";
 

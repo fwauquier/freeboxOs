@@ -7,8 +7,8 @@ namespace FreeboxOs.Models;
 
 public sealed class LanHostL2Ident:JsonModel {
 	/// <summary> Layer 2 id </summary>
-	public string id  { get; init; }
+	public required string id  { get; init; }
 	/// <summary> Type of layer 2 address </summary>
-	public LanHostL2IdentType type { get; init; }
+	public required LanHostL2IdentType type { get; init; }
 
 }

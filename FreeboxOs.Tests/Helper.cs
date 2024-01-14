@@ -1,12 +1,9 @@
-﻿// <copyright company = "Frederic Wauquier">
+// <copyright company = "Frederic Wauquier">
 //    Copyright (c) Frederic Wauquier All rights reserved.
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FreeboxOs;
 
@@ -29,7 +26,7 @@ internal static class Helper {
 	}
 
 	public static async Task DumpAsync<T>(this Task<T?> obj, TestContext context  ) {
-		context.WriteLine(Serialize(await obj.ConfigureAwait(false)));
+		context.WriteLine(Serialize(await obj));
 	}
 
 	public static string Serialize(this object? obj) {
@@ -42,7 +39,7 @@ internal static class Helper {
 		foreach (var item in di.GetDirectories()) ExecuteInFolder(item);
 
 		foreach (var file in di.GetFiles("*.*")) {
-			var extension     = file.Extension.ToLower();
+			var extension     = file.Extension.ToLowerInvariant();
 			var fileName      = Path.GetFileNameWithoutExtension(file.FullName);
 			var fileDirectory = file.Directory;
 			if (fileDirectory == null) continue;

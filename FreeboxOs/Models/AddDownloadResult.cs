@@ -6,6 +6,6 @@
 namespace FreeboxOs.Models;
 
 public class AddDownloadResult {
-	public bool Success { get; set; }
-	public List<int> TaskId { get; set; }
+	public bool Success { get; init; }
+    public required List<int> TaskId { get; init; }
 }

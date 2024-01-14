@@ -1,17 +1,15 @@
-﻿// <copyright company = "Frederic Wauquier">
+// <copyright company = "Frederic Wauquier">
 //    Copyright (c) Frederic Wauquier All rights reserved.
 //    <author >Frederic Wauquier</author>
 // </copyright >
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FreeboxOs;
 
 [TestClass]
 public class ApiAirmediaTests {
 
-	public TestContext TestContext { get; set; }
+	
+	public TestContext TestContext { get; set; } = null!;
 
 
 	// [TestMethod]

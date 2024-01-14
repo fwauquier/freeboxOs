@@ -3,11 +3,9 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-using Microsoft.Extensions.Logging;
-
 namespace FreeboxOs;
 
-sealed partial class Api{
+public sealed partial class Api{
 
 
 }

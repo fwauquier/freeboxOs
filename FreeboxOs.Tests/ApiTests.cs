@@ -1,24 +1,22 @@
-﻿// <copyright company = "Frederic Wauquier">
-//    Copyright (c) Frederic Wauquier All rights reserved.
-//    <author >Frederic Wauquier</author>
+// <copyright>
+// Copyright (c) Frederic Wauquier rights reserved.
+// <author > Frederic Wauquier</author >
 // </copyright >
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FreeboxOs;
 
 [TestClass]
 public class ApiTests {
+	public TestContext TestContext { get; set; } = default!;
 
-	public TestContext TestContext { get; set; }
-
-	[TestMethod]
-	public async Task GetVersionAsync() {
-		using var api = Settings.GetApi(TestContext, false, LogLevel.Trace);
-		var result = await api.GetVersionAsync().ConfigureAwait(false);
+	[DataTestMethod]
+	[DataRow("http://mafreebox.freebox.fr")]
+	[DataRow("http://192.168.0.254")]
+	public async Task GetVersionAsync(string uri) {
+		var server = new Api(new Uri(uri), "");
+		server.Logger = Settings.GetLogger(TestContext, server.GetType().FullName);
+		using var api    = server;
+		var       result = await api.GetVersionAsync();
 		result.Dump(TestContext);
 	}
-
 }

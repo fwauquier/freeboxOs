@@ -1,6 +1,6 @@
-﻿// <copyright company = "Frederic Wauquier">
-//    Copyright (c) Frederic Wauquier All rights reserved.
-//    <author >Frederic Wauquier</author>
+// <copyright>
+// Copyright (c) Frederic Wauquier rights reserved.
+// <author > Frederic Wauquier</author >
 // </copyright >
 
 using System.Diagnostics.CodeAnalysis;
@@ -8,42 +8,46 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 
 namespace FreeboxOs;
+ 
 
 // https://dev.freebox.fr/sdk/os/
 // Most API uses the REST architecture, pay attention to the http methods used for each request.
 // The API response is always a JSON object using utf8 encoding.
 public sealed partial class Api : IDisposable {
-	public static readonly JsonSerializerOptions jsonOption = new() {
-		AllowTrailingCommas = false,
-		DefaultBufferSize = 0,
-		WriteIndented = false,
-		IgnoreReadOnlyFields = true,
-		IgnoreReadOnlyProperties = true,
-		IncludeFields = false,
-		MaxDepth = 0,
-		DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-		DictionaryKeyPolicy = null,
-		Encoder = null,
-		UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode,
-		NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
-		PreferredObjectCreationHandling = JsonObjectCreationHandling.Replace,
-		PropertyNameCaseInsensitive = false,
-		PropertyNamingPolicy = null,
-		TypeInfoResolver = null,
-		ReadCommentHandling = JsonCommentHandling.Skip,
-		UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-		Converters = {
-			//new UnixEpochDateTimeConverter(),
-			new JsonStringEnumConverter()
-		}
-	};
+	private static readonly JsonSerializerOptions jsonOption = new JsonSerializerOptions
+	                                                           {
+		                                                           AllowTrailingCommas = false,
+		                                                           DefaultBufferSize = 0,
+		                                                           WriteIndented = false,
+		                                                           IgnoreReadOnlyFields = true,
+		                                                           IgnoreReadOnlyProperties = true,
+		                                                           IncludeFields = false,
+		                                                           MaxDepth = 0,
+		                                                           DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+		                                                           DictionaryKeyPolicy = null,
+		                                                           Encoder = null,
+		                                                           UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode,
+		                                                           NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
+		                                                           PreferredObjectCreationHandling = JsonObjectCreationHandling.Replace,
+		                                                           PropertyNameCaseInsensitive = false,
+		                                                           PropertyNamingPolicy = null,
+		                                                           TypeInfoResolver = null,
+		                                                           ReadCommentHandling = JsonCommentHandling.Skip,
+		                                                           UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+		                                                           Converters =
+		                                                           {
+			                                                           //new UnixEpochDateTimeConverter(),
+			                                                           new JsonStringEnumConverter()
+		                                                           }
+	                                                           };
 
 	private readonly HttpClient _httpClient;
 	private readonly string _password;
+ 
 
 	public Api(Uri uri, string password) {
 		_password = password;
-		_httpClient = new HttpClient { BaseAddress = uri };
+		_httpClient = new HttpClient {BaseAddress = uri};
 		_httpClient.DefaultRequestHeaders.Add("X-FBX-FREEBOX0S", "1");
 	}
 
@@ -52,8 +56,7 @@ public sealed partial class Api : IDisposable {
 	public string app_version { get; init; } = "1.0.0";
 	public string device_name { get; init; } = Environment.MachineName;
 
-
-	public ILogger? Logger { get; set; } = null;
+	public ILogger? Logger { get; set; }
 
 	public void Dispose() {
 		EnsureLogOffAsync().GetAwaiter().GetResult();
@@ -61,12 +64,38 @@ public sealed partial class Api : IDisposable {
 	}
 
 	private T? Deserialize<T>(string jsonString) where T : class {
+	 
 		Logger?.LogTrace("Deserialize: {JsonString}", jsonString);
-		var deserialize = JsonSerializer.Deserialize<Response<T>>(jsonString);
-		if (deserialize is null) throw new ApiException($"Cannot deserialize response to {typeof(T).FullName}");
-		if (deserialize.Success == false) throw new ApiException($"Response is not successfully. Code:{deserialize.ErrorCode} Message:{deserialize.ErrorMessage}");
+		Response<T>? deserialize;
+#if DEBUG
+		jsonString = JsonModel.Reformat(jsonString);
+		try {
+			deserialize = JsonSerializer.Deserialize<Response<T>>(jsonString);
+		} catch (System.Text.Json.JsonException e) {
+			throw new ApiException($"Cannot deserialize response to {typeof(T).FullName}.{ Environment.NewLine }{jsonString}", e);
+		}
 
-		return deserialize.Result !;
+#else
+         deserialize = JsonSerializer.Deserialize<Response<T>>(jsonString);
+#endif
+
+        if (deserialize is null) throw new ApiException($"Cannot deserialize response to {typeof(T).FullName}");
+		if (deserialize.Success == false) throw new ApiException($"Response is not successfully. Code:{deserialize.ErrorCode} Message:{deserialize.ErrorMessage}");
+		var result = deserialize.Result;
+#if DEBUG
+		if (result is JsonModel jsonModel)
+		{
+			jsonModel.EnsureAllDataDeserialized();
+		}
+		else if (result is IEnumerable<JsonModel> jsonModels)
+		{
+			foreach (var jsonModel2 in jsonModels)
+			{
+				jsonModel2.EnsureAllDataDeserialized();
+			}
+		}
+#endif
+        return result;
 	}
 
 	public async Task<T?> GetAsync<T>([StringSyntax(StringSyntaxAttribute.Uri)] string requestUri, bool addVersion = true) where T : class {
@@ -100,7 +129,8 @@ public sealed partial class Api : IDisposable {
 		if (addVersion) requestUri = await ReformatUri(requestUri).ConfigureAwait(false);
 		Logger?.LogDebug("[POST] {RequestUri}", requestUri);
 
-		var response = await _httpClient.PostAsync(requestUri, CreateContent(content)).ConfigureAwait(false);
+		using var httpContent = CreateContent(content);
+		var response    = await _httpClient.PostAsync(requestUri, httpContent).ConfigureAwait(false);
 
 		// Check if the request was successful
 		response.EnsureSuccessStatusCode();
@@ -111,11 +141,10 @@ public sealed partial class Api : IDisposable {
 		return Deserialize<T>(await PostAsync(requestUri, content, addVersion).ConfigureAwait(false));
 	}
 
-	public HttpContent? CreateContent(object? content) {
+	public static HttpContent? CreateContent(object? content) {
 		if (content is null) return null;
 		return new StringContent(JsonSerializer.Serialize(content, jsonOption), Encoding.UTF8, "application/json");
 	}
-
 
 // private async Task<T> PostAsync<T>([StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, HttpContent? content) where T : class {
 // 		Logger?.LogDebug("[POST] {RequestUri}", requestUri);
@@ -129,7 +158,9 @@ public sealed partial class Api : IDisposable {
 // 		throw new ApiException($"Request failed with status code {response.StatusCode}");
 // 	}
 
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
 	private sealed class Response<T> where T : class {
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
 		/// <summary>
 		///     In cas of error, provides a French error message relative to the error
 		/// </summary>

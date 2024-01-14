@@ -7,9 +7,10 @@ namespace FreeboxOs.Models;
 
 public sealed class LanHostL3Connectivity:JsonModel {
 	/// <summary> Layer 3 address </summary>
-	public string addr   { get; init; }
+	public required string addr   { get; init; }
 	/// <summary> address Type ipv4 or ipv6 </summary>
-	public string af  { get; init; }
+	// TODO convert to Enum
+	public required string af  { get; init; }
 	/// <summary> is the connection active</summary>
 	public bool active    { get; init; }
 	/// <summary>is the connection reachable </summary>

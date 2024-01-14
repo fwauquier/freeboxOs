@@ -10,17 +10,17 @@ public class Download {
 
 	[JsonPropertyName("tx_bytes")] public double TxBytes { get; set; }
 
-	[JsonPropertyName("download_dir")] public string DownloadDir { get; set; }
+	[JsonPropertyName("download_dir")] public string? DownloadDir { get; set; }
 
-	[JsonPropertyName("archive_password")] public string ArchivePassword { get; set; }
+	[JsonPropertyName("archive_password")] public string? ArchivePassword { get; set; }
 
 	[JsonPropertyName("eta")] public int Eta { get; set; }
 
-	[JsonPropertyName("status")] public string Status { get; set; }
+	[JsonPropertyName("status")] public string? Status { get; set; }
 
-	[JsonPropertyName("io_priority")] public string IoPriority { get; set; }
+	[JsonPropertyName("io_priority")] public string? IoPriority { get; set; }
 
-	[JsonPropertyName("type")] public string Type { get; set; }
+	[JsonPropertyName("type")] public string? Type { get; set; }
 
 	[JsonPropertyName("queue_pos")] public int QueuePosition { get; set; }
 
@@ -32,7 +32,7 @@ public class Download {
 
 	[JsonPropertyName("tx_rate")] public int TxRate { get; set; }
 
-	[JsonPropertyName("name")] public string Name { get; set; }
+	[JsonPropertyName("name")] public string? Name { get; set; }
 
 	[JsonPropertyName("tx_pct")] public int TxPct { get; set; }
 
@@ -40,7 +40,7 @@ public class Download {
 
 	[JsonPropertyName("rx_rate")] public int RxRate { get; set; }
 
-	[JsonPropertyName("error")] public string Error { get; set; }
+	[JsonPropertyName("error")] public string? Error { get; set; }
 
-	[JsonPropertyName("size")] public object Size { get; set; }
+	[JsonPropertyName("size")] public object? Size { get; set; }
 }

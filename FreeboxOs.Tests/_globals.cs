@@ -3,10 +3,6 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
-namespace FreeboxOs.Models;
-
-public sealed class LanBrowserInterface:JsonModel {
-	public string name { get; init; }
-	public int host_count { get; init; }
-
-}
+global using System.Text.Json.Serialization;
+global using System.Text.Json;
+global using Microsoft.VisualStudio.TestTools.UnitTesting;

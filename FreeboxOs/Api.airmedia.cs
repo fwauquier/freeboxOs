@@ -5,7 +5,7 @@
 
 namespace FreeboxOs;
 
-sealed partial class Api{
+public sealed partial class Api{
 /*
  	private const string ReceiversPath = "/api/v3/airmedia/receivers/";
 	public async Task<IEnumerable<AirmediaResult>> ListAirmediaReceivers() {

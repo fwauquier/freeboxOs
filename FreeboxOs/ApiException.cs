@@ -8,4 +8,5 @@ namespace FreeboxOs;
 
 public class ApiException : Exception {
 	public ApiException(string message) : base(message) { }
+	public ApiException(string message,Exception e) : base(message,e) { }
 }

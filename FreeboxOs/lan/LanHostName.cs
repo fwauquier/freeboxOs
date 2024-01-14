@@ -9,10 +9,11 @@ public sealed class  LanHostName:JsonModel {
 	/// <summary>
 	/// Host name
 	/// </summary>
-	public string name { get; init; }
+	public required string name { get; init; }
 	/// <summary>
 	/// source of the name
 	/// </summary>
-	public string source  { get; init; }
+	// TODO: convert to enum
+	public required string source  { get; init; }
 
 }

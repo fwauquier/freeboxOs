@@ -5,4 +5,8 @@
 
 namespace FreeboxOs.Models;
 
+public sealed class LanBrowserInterface:JsonModel {
+	public required string name { get; init; }
+	public int host_count { get; init; }
 
+}

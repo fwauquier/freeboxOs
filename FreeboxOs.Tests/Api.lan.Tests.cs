@@ -38,12 +38,10 @@ public class ApiLanTests {
 		using var api  =Settings.GetApi(TestContext,logLevel:LogLevel.Information);
 		var result= await api.LanBrowserHostAsync(@interface);
 		if (result is null) return;
-		TestContext.WriteLine("public enum hostType{");
+		 
 		foreach( var item in result.Select(x => x.host_type).Distinct().OrderBy(x=>x)) {
-			TestContext.WriteLine($"/// <summary>{item}</summary>");
-			TestContext.WriteLine($"{item},");
-		}
-		TestContext.WriteLine(" }");
+			TestContext.WriteLine($"{item}");
+		} 
 
 	}
 	[DataTestMethod]
@@ -53,12 +51,10 @@ public class ApiLanTests {
 		using var api  =Settings.GetApi(TestContext,logLevel:LogLevel.Information);
 		var result= await api.LanBrowserHostAsync(@interface);
 		if (result is null) return;
-		TestContext.WriteLine("public enum LanHostL2IdentType{");
+	
 		foreach( var item in result.Select(x => x.l2ident?.type).Distinct().OrderBy(x=>x)) {
-			TestContext.WriteLine($"/// <summary>{item}</summary>");
-			TestContext.WriteLine($"{item},");
+	 		TestContext.WriteLine($"{item}");
 		}
-		TestContext.WriteLine(" }");
 	}
 
 	[DataTestMethod]

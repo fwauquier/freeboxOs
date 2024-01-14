@@ -12,7 +12,7 @@ internal static class Helper {
 		                                                                                            WriteIndented = true,
 		                                                                                            IgnoreReadOnlyFields = true,
 		                                                                                            IgnoreReadOnlyProperties = true,
-		                                                                                            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+		                                                                                            DefaultIgnoreCondition = JsonIgnoreCondition.Never
 	                                                                                            };
 
 	private static readonly Regex guidRegex = new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);

@@ -3,7 +3,9 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
+using System.Net.NetworkInformation;
 using FreeboxOs.lan;
+using FreeboxOs.wifi;
 
 namespace FreeboxOs;
 
@@ -16,9 +18,11 @@ public class Study {
 	public async Task network_control() {
 		using var api = Settings.GetApi(TestContext);
 		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("network_control").ConfigureAwait(false);
+		var result = await api.GetAsync<NetworkControl[]>("network_control").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
+
+	
 
 	[TestMethod]
 	public async Task mac_filter() {
@@ -41,20 +45,10 @@ public class Study {
 		var result = await api.GetAsync<object>("wifi/ap").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
-	[TestMethod]
-	public async Task wifi_config() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("wifi/config").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
-	[TestMethod]
-	public async Task wifi_bbs() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("wifi/bbs").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
+	
+
+
+ 
 	[TestMethod]
 	public async Task taskcount() {
 		using var api = Settings.GetApi(TestContext);

@@ -22,7 +22,7 @@ public sealed partial class Api : IDisposable {
 		                                                           IgnoreReadOnlyFields = true,
 		                                                           IgnoreReadOnlyProperties = true,
 		                                                           IncludeFields = false,
-		                                                           MaxDepth = 0,
+		                                                           MaxDepth = 64,
 		                                                           DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
 		                                                           DictionaryKeyPolicy = null,
 		                                                           Encoder = null,
@@ -34,11 +34,7 @@ public sealed partial class Api : IDisposable {
 		                                                           TypeInfoResolver = null,
 		                                                           ReadCommentHandling = JsonCommentHandling.Skip,
 		                                                           UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-		                                                           Converters =
-		                                                           {
-			                                                           //new UnixEpochDateTimeConverter(),
-			                                                           new JsonStringEnumConverter()
-		                                                           }
+		                                                          
 	                                                           };
 
 	private readonly HttpClient _httpClient;

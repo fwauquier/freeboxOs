@@ -3,25 +3,31 @@
 //    <author >Frederic Wauquier</author>
 // </copyright >
 
+ 
+
 namespace FreeboxOs;
 
 [TestClass]
-public class ApiParentalTests {
+public class ApiWifiTests {
 
 	public TestContext TestContext { get; set; } = null!;
 
 
 	[TestMethod]
-	public async Task ParentalConfig() {
+	public async Task WifiBss() {
 		using var api    = Settings.GetApi(TestContext);
-		var       result = await api.ParentalConfig();
+		var       result = await api.WifiBss();
 		result.Dump(TestContext);
 	}
 
-	// [TestMethod]
-	// public async Task ParentalFilters() {
-	// 	using var api    = Settings.GetApi(TestContext);
-	// 	var       result = await api.ParentalFilters();
-	// 	result.Dump(TestContext);
-	// }
+	[TestMethod]
+	public async Task WifiConfig() {
+		using var api    = Settings.GetApi(TestContext);
+		var       result = await api.WifiConfig();
+		result.Dump(TestContext);
+	}
+
+
+
+
 }

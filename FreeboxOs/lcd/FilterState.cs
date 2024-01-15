@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-namespace FreeboxOs.parental;
+namespace FreeboxOs.lcd;
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum FilterState {
 	/// <summary>

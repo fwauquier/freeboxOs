@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-using FreeboxOs;
+namespace FreeboxOs.wifi;
 
 public sealed class ApCapability : JsonModel {
 	public bool? shortgi20 { get; set; }

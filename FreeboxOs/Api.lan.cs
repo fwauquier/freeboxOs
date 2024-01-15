@@ -13,27 +13,28 @@ public sealed partial class Api {
 	/// Getting the list of browsable LAN interfaces
 	/// </summary>
 	/// <returns></returns>
-	public async Task<LanBrowserInterface[]?> LanBrowserInterfacesAsync() {
+	public async Task<BrowserInterface[]?> LanBrowserInterfacesAsync() {
 		await EnsureLoginAsync().ConfigureAwait(false);
-		return await GetAsync<LanBrowserInterface[]>("lan/browser/interfaces").ConfigureAwait(false);
+		return await GetAsync<BrowserInterface[]>("lan/browser/interfaces").ConfigureAwait(false);
 	}
 
 	/// <summary>
 	/// Returns the list of LanHost on this interface
 	/// </summary>
 	/// <returns></returns>
-	public async Task<LanHost[]?> LanBrowserHostAsync(string @interface) {
+	public async Task<Host[]?> LanBrowserHostAsync(string @interface) {
 		await EnsureLoginAsync().ConfigureAwait(false);
-		return await GetAsync<LanHost[]>("lan/browser/"+@interface).ConfigureAwait(false);
+		return await GetAsync<Host[]>("lan/browser/"+@interface).ConfigureAwait(false);
+		
 	}
 
     /// <summary>
     /// Get the current Lan configuration
     /// </summary>
-    public async Task<LanConfig?> GetLanConfiguration()
+    public async Task<Config?> GetLanConfiguration()
 	{
 		await EnsureLoginAsync().ConfigureAwait(false);
-		return await GetAsync<LanConfig>("lan/config").ConfigureAwait(false);
+		return await GetAsync<Config>("lan/config").ConfigureAwait(false);
 	}
 
     }

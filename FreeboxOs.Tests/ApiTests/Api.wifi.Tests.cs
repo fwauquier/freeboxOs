@@ -44,4 +44,18 @@ public class ApiWifiTests {
 
 
 
+	[TestMethod]
+	public async Task WifiMacFilter() {
+		using var api    = Settings.GetApi(TestContext);
+		var       result = await api.WifiMacFilter();
+
+		Assert.IsNotNull(result);
+		 foreach (var item in result) {
+		 	TestContext.WriteLine($"id:{item.id} type:{item.type,-10} hostname:{item.hostname,-40} mac:{item.mac}");
+		 }
+		result.Dump(TestContext);
+	}
+
+
+
 }

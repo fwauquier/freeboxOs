@@ -43,5 +43,5 @@ public sealed class DhcpDynamicLease : JsonModel {
 	public bool is_static { get; set; }
 
 	/// <summary>   </summary>
-	public LanHost? host { get; init; }
+	public Host? host { get; init; }
 }

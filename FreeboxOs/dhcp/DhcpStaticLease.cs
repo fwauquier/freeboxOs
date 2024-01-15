@@ -20,7 +20,7 @@ public sealed class DhcpStaticLease : JsonModel {
 	/// <summary> IPv4 to assign to the host  </summary>
 	public   string? ip { get; set; }
 	/// <summary>   </summary>
-	public   LanHost? host { get; init; }
+	public   Host? host { get; init; }
 	
 
 

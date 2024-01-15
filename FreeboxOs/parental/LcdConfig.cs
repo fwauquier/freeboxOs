@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-namespace FreeboxOs.lcd;
+namespace FreeboxOs.parental;
 
 public sealed class LcdConfig : JsonModel {
 	/// <summary>the screen brightness (range from 0 to 100)</summary>

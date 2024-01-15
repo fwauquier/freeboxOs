@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-namespace FreeboxOs.parental;
+namespace FreeboxOs.lcd;
 
 /// <summary>
 /// Parental filter configuration allow you to set the default filter_state to apply to hosts without rules on your network

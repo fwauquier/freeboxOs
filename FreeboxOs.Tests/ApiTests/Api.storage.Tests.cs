@@ -6,20 +6,18 @@
 namespace FreeboxOs.ApiTests;
 
 [TestClass]
-public class ApiNetworkControlTests {
+public class ApiStorageTests {
 
 	public TestContext TestContext { get; set; } = null!;
 
 
  
 	[TestMethod]
-	public async Task NetworkControl() {
+	public async Task StorageDisk() {
 		using var api    = Settings.GetApi(TestContext);
-		var       result = await api.GetProfiles();
+		var       result = await api.StorageDisk();
 		Assert.IsNotNull(result);
-		foreach (var item in result) {
-			TestContext.WriteLine($"{item.profile_name,-20} Nb hosts:{item.hosts?.Length,-5} current_mode:{item.current_mode,-10} next_change:{item.next_change:g}");
-		}
+	 
 		result.Dump(TestContext);
 	}
 

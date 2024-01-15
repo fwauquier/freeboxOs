@@ -6,7 +6,7 @@
 namespace FreeboxOs.lan;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum hostType {
+public enum HostType {
 
 	/// <summary>Workstation </summary>
 	workstation,

@@ -5,7 +5,7 @@
 
 namespace FreeboxOs.lan;
 
-public sealed class LanConfig : JsonModel {
+public sealed class Config : JsonModel {
 	/// <summary> Freebox Server IPv4 address </summary>
 	public   string? ip { get; init; }
 

@@ -5,8 +5,8 @@
 
 namespace FreeboxOs.lan;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum LanHostL2IdentType{
-	/// <summary>mac_address</summary>
-	mac_address,
+public sealed class BrowserInterface:JsonModel {
+	public required string name { get; init; }
+	public int host_count { get; init; }
+
 }

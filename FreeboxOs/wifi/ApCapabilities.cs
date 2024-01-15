@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-using FreeboxOs;
+namespace FreeboxOs.wifi;
 
 public sealed class ApCapabilities : JsonModel {
 	[JsonPropertyName("6g")]

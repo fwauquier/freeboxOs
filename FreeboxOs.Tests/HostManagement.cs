@@ -13,39 +13,37 @@ public class ApiVersionTests {
 
 	[TestMethod]
 	public async Task HostByProfile() {
-		using var api    = Settings.GetApi(TestContext);
-		var       hosts  =await api.LanBrowserHostAsync("pub");
+		using var api   = Settings.GetApi(TestContext);
+		var       hosts = await api.LanBrowserHostAsync("pub");
 		Assert.IsNotNull(hosts);
 		var profiles = await api.GetProfiles();
 		Assert.IsNotNull(profiles);
 
-		var orphanHost=new List<LanHost>();
+		var orphanHost = new List<Host>();
 
 		foreach (var host in hosts) {
 			var found = false;
 			foreach (var profile in profiles) {
-				if (profile.hosts.Any(i=>i.id==host.id)) {
+				if (profile.hosts is not null && profile.hosts.Any(i => i.id == host.id)) {
 					found = true;
 					break;
 				}
 			}
 
-			if (!found) {
-				orphanHost.Add(host);
-			}
+			if (!found) orphanHost.Add(host);
 		}
-		TestContext.WriteLine($"*** Not assign to a profile ***************************************************************************************************************************");
+		TestContext.WriteLine("*** Not assign to a profile ***************************************************************************************************************************");
 		foreach (var host in orphanHost.OrderBy(i => i.primary_name)) {
 			TestContext.WriteLine($"primary_name:{host.primary_name} active:{host.active} last_activity:{host.last_activity} first_activity:{host.first_activity}");
 		}
-		foreach (var profile in profiles.OrderBy(i=>i.profile_name)) {
-			TestContext.WriteLine(string.Empty);
-		
-		TestContext.WriteLine($"*** {profile.profile_name} ***************************************************************************************************************************");
-		foreach (var host in profile.hosts.OrderBy(i => i.primary_name)) {
-			TestContext.WriteLine($"primary_name:{host.primary_name} active:{host.active} last_activity:{host.last_activity} first_activity:{host.first_activity}");
+		foreach (var profile in profiles.OrderBy(i => i.profile_name)) {
+			if (profile.hosts != null) {
+				TestContext.WriteLine(string.Empty);
+
+				TestContext.WriteLine($"*** {profile.profile_name} ***************************************************************************************************************************");
+				foreach (var host in profile.hosts.OrderBy(i => i.primary_name)) TestContext.WriteLine($"primary_name:{host.primary_name} active:{host.active} last_activity:{host.last_activity} first_activity:{host.first_activity}");
+			}
 		}
-}
 
 		//var       server = new Api(new Uri(uri), "");
 		//server.Logger = Settings.GetLogger(TestContext, server.GetType().FullName);

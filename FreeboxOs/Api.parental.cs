@@ -3,7 +3,7 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-using FreeboxOs.parental;
+using FreeboxOs.lcd;
 
 namespace FreeboxOs;
 

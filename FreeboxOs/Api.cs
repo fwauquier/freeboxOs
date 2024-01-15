@@ -5,6 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using FreeboxOs.version;
 using Microsoft.Extensions.Logging;
 
 namespace FreeboxOs;
@@ -47,10 +48,30 @@ public sealed partial class Api : IDisposable {
 		_httpClient.DefaultRequestHeaders.Add("X-FBX-FREEBOX0S", "1");
 	}
 
-	public string app_id { get; init; } = "FWA_FreeboxOs";
-	public string app_name { get; init; } = "FWA_FreeboxOs";
-	public string app_version { get; init; } = "1.0.0";
-	public string device_name { get; init; } = Environment.MachineName;
+	public string app_id { get; set; } = "FWA_FreeboxOs";
+	public string app_name { get; set; } = "FWA_FreeboxOs";
+	public string app_version { get; set; } = "1.0.0";
+	public string device_name { get; set; } = Environment.MachineName;
+
+	private ApiVersion? _apiVersion;
+
+	public  string  ReformatUri(string uri,bool useVersion=false) {
+		if (useVersion) {
+			//  https://[api_domain]:[freebox_port]/[api_base_url]/v[major_api_version]/[api_url]
+			var apiVersion        = _apiVersion ??= GetVersionAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+			var api_domain        = apiVersion.api_domain;
+			var freebox_port      = apiVersion.https_port;
+			var api_base_url      = apiVersion.api_base_url;
+			var major_api_version = apiVersion.api_version.Split('.')[0];
+			if (string.IsNullOrWhiteSpace(api_domain)) return uri;
+			if (freebox_port < 433) return uri;
+			if (string.IsNullOrWhiteSpace(api_base_url)) return uri;
+			if (string.IsNullOrWhiteSpace(apiVersion.api_version)) return uri;
+			if (string.IsNullOrWhiteSpace(api_domain)) return uri;
+			return $"{api_base_url}v{major_api_version}/{uri.Trim('/')}";
+		}
+		return $"/api/latest/{uri.Trim('/')}";
+	}
 
 	public ILogger? Logger { get; set; }
 
@@ -110,7 +131,7 @@ public sealed partial class Api : IDisposable {
 	}
 
 	public async Task<string> GetAsync([StringSyntax(StringSyntaxAttribute.Uri)] string requestUri, bool addVersion = true) {
-		if (addVersion) requestUri = await ReformatUri(requestUri).ConfigureAwait(false);
+		if (addVersion) requestUri =  ReformatUri(requestUri);
 		Logger?.LogDebug("[GET] {RequestUri}", requestUri);
 		var response = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
@@ -119,7 +140,7 @@ public sealed partial class Api : IDisposable {
 	}
 
 	public async Task<string> PostAsync([StringSyntax(StringSyntaxAttribute.Uri)] string requestUri, HttpContent? content = null, bool addVersion = true) {
-		if (addVersion) requestUri = await ReformatUri(requestUri).ConfigureAwait(false);
+		if (addVersion) requestUri = ReformatUri(requestUri);
 		Logger?.LogDebug("[POST] {RequestUri}", requestUri);
 		var response = await _httpClient.PostAsync(requestUri, content).ConfigureAwait(false);
 
@@ -133,7 +154,7 @@ public sealed partial class Api : IDisposable {
 	}
 
 	public async Task<string> PostAsync([StringSyntax(StringSyntaxAttribute.Uri)] string requestUri, object? content = null, bool addVersion = true) {
-		if (addVersion) requestUri = await ReformatUri(requestUri).ConfigureAwait(false);
+		if (addVersion) requestUri = ReformatUri(requestUri);
 		Logger?.LogDebug("[POST] {RequestUri}", requestUri);
 
 		using var httpContent = CreateContent(content);

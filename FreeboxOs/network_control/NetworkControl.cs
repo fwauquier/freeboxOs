@@ -11,11 +11,11 @@ public sealed class NetworkControl : JsonModel {
 	public   int profile_id { get; init; }
 
 	//public string? override_mode { get; init; }
-	public required LanHost[] hosts { get; init; }
+	public   Host[]? hosts { get; init; }
 
 	public DayRange[]? cdayranges { get; init; }
 	public int resolution { get; init; }
-	public required string profile_name { get; init; }
+	public   string? profile_name { get; init; }
 	public NetworkControlMode current_mode { get; init; }
 	public string[]? macs { get; init; }
 

@@ -4,44 +4,46 @@
 // </copyright >
 
 using FreeboxOs.lan;
+using Microsoft.Extensions.Logging;
 
-namespace FreeboxOs.ApiTests;
+namespace FreeboxOs;
 
 [TestClass]
 public class Study {
 	public TestContext TestContext { get; set; } = null!;
-
-
-	[TestMethod]
-	public async Task network_control() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<network_control.NetworkControl[]>("network_control").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
-
-	
-
-	[TestMethod]
-	public async Task mac_filter() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("wifi/mac_filter").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
-	[TestMethod]
-	public async Task lan_browser_pub() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<LanHost[]>("lan/browser/pub").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
  
+
+
+
 	[TestMethod]
 	public async Task taskcount() {
 		using var api = Settings.GetApi(TestContext);
 		await api.EnsureLoginAsync().ConfigureAwait(false);
 		var result = await api.GetAsync<object>("taskcount").ConfigureAwait(false);
+		result.Dump(TestContext);
+	}
+
+	[TestMethod]
+	public async Task settings() {
+		using var api = Settings.GetApi(TestContext, LogLevel.Trace);
+		await api.EnsureLoginAsync().ConfigureAwait(false);
+		var result = await api.GetAsync<object>("settings").ConfigureAwait(false);
+		result.Dump(TestContext);
+	}
+
+	[TestMethod]
+	public async Task connection_config() {
+		using var api = Settings.GetApi(TestContext);
+		await api.EnsureLoginAsync().ConfigureAwait(false);
+		var result = await api.GetAsync<object>("connection/config").ConfigureAwait(false);
+		result.Dump(TestContext);
+	}
+
+	[TestMethod]
+	public async Task upload() {
+		using var api = Settings.GetApi(TestContext);
+		await api.EnsureLoginAsync().ConfigureAwait(false);
+		var result = await api.GetAsync<object>("upload").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
 }

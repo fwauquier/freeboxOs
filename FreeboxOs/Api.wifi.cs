@@ -19,5 +19,9 @@ public sealed partial class Api {
 		await EnsureLoginAsync().ConfigureAwait(false);
 		return await GetAsync<Ap[]>("wifi/ap").ConfigureAwait(false);
 	}
-
+	public async Task<MacFilter[]?> WifiMacFilter() {
+		await EnsureLoginAsync().ConfigureAwait(false);
+		return await GetAsync<MacFilter[]>("wifi/mac_filter").ConfigureAwait(false);
+	}
+	
 }

@@ -5,7 +5,7 @@
 
 namespace FreeboxOs.lan;
 
-public sealed class LanHostL3Connectivity:JsonModel {
+public sealed class Layer3Connectivity:JsonModel {
 	/// <summary> Layer 3 address </summary>
 	public required string addr   { get; init; }
 	/// <summary> address Type ipv4 or ipv6 </summary>

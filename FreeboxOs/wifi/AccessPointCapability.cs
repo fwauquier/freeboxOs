@@ -5,7 +5,7 @@
 
 namespace FreeboxOs.wifi;
 
-public sealed class ApCapability : JsonModel {
+public sealed class AccessPointCapability : JsonModel {
 	public bool? shortgi20 { get; set; }
 	public bool? vht_rx_ldpc { get; set; }
 	public bool? vht_sounding_dimensions_1 { get; set; }

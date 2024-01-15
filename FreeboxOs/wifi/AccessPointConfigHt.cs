@@ -5,7 +5,7 @@
 
 namespace FreeboxOs.wifi;
 
-public sealed class ApConfigHt : JsonModel {
+public sealed class AccessPointConfigHt : JsonModel {
 	public bool? greenfield { get; set; }
 	public bool? shortgi20 { get; set; }
 	public bool? vht_rx_ldpc { get; set; }

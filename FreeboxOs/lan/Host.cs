@@ -21,7 +21,7 @@ public sealed class Host:JsonModel {
 	/// <summary> Host id (unique on this interface) </summary>
 	public required string id  { get; init; }
 	/// <summary> Host primary name (chosen from the list of available names, or manually set by user) </summary>
-	public required string primary_name  { get; set; }
+	public  string? primary_name  { get; set; }
 	/// <summary>When possible, the Freebox will try to guess the host_type, but you can manually override this to the correct value.</summary>
 	public HostType  host_type   { get; set; }
 	/// <summary> If true the primary name has been set manually</summary>

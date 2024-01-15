@@ -5,7 +5,7 @@
 
 namespace FreeboxOs.wifi;
 
-public sealed class ApConfigHe : JsonModel {
+public sealed class AccessPointConfigHe : JsonModel {
 	public bool? enabled { get; set; }
 	public bool? su_beamformee { get; set; }
 	public bool? twt_responder { get; set; }

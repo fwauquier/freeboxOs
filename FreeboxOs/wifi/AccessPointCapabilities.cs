@@ -5,13 +5,13 @@
 
 namespace FreeboxOs.wifi;
 
-public sealed class ApCapabilities : JsonModel {
+public sealed class AccessPointCapabilities : JsonModel {
 	[JsonPropertyName("6g")]
-	public ApCapability? _6G { get; set; }
+	public AccessPointCapability? _6G { get; set; }
 	[JsonPropertyName("5g")]
-	public ApCapability? _gG { get; set; }
+	public AccessPointCapability? _gG { get; set; }
 	[JsonPropertyName("2d4g")]
-	public ApCapability? _2d4g { get; set; }
+	public AccessPointCapability? _2d4g { get; set; }
 	[JsonPropertyName("60g")]
-	public ApCapability? _60g { get; set; }
+	public AccessPointCapability? _60g { get; set; }
 }

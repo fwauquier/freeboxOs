@@ -3,7 +3,6 @@
 // <author > Frederic Wauquier</author >
 // </copyright >
 
-using FreeboxOs.lan;
 using Microsoft.Extensions.Logging;
 
 namespace FreeboxOs;
@@ -37,4 +36,12 @@ public class Study {
 		var result = await api.GetAsync<object>("upload").ConfigureAwait(false);
 		result.Dump(TestContext);
 	}
+	[TestMethod]
+	public async Task wifi_ap_0_channel_survey_history() {
+		using var api = Settings.GetApi(TestContext);
+		await api.EnsureLoginAsync().ConfigureAwait(false);
+		var result = await api.GetAsync<object>("wifi/ap/0/channel_survey_history/1705301714655").ConfigureAwait(false);
+		result.Dump(TestContext);
+	}
+
 }

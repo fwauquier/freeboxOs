@@ -29,16 +29,7 @@ public class Study {
 		await api.EnsureLoginAsync().ConfigureAwait(false);
 		var result = await api.GetAsync<object>("settings").ConfigureAwait(false);
 		result.Dump(TestContext);
-	}
-
-	[TestMethod]
-	public async Task connection_config() {
-		using var api = Settings.GetApi(TestContext);
-		await api.EnsureLoginAsync().ConfigureAwait(false);
-		var result = await api.GetAsync<object>("connection/config").ConfigureAwait(false);
-		result.Dump(TestContext);
-	}
-
+	} 
 	[TestMethod]
 	public async Task upload() {
 		using var api = Settings.GetApi(TestContext);

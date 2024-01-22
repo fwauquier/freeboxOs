@@ -1,77 +1,59 @@
 <Project>
-	<PropertyGroup>
-		<Copyright>Copyright © FLYINGHOLDING N.V. $([System.DateTime]::Now.ToString(yyyy))</Copyright>
-		<Company>FLYINGHOLDING N.V.</Company>
-		<Authors>Frederic Wauquier</Authors>
-		<!--        <PlatformTarget>AnyCPU</PlatformTarget>-->
-		<Nullable>enable</Nullable>
-		<AnalysisLevel>latest</AnalysisLevel>
-		<LangVersion>default</LangVersion>
-		<NeutralLanguage>en-US</NeutralLanguage>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<IsPackable>false</IsPackable>
-		<!--		<Platforms>AnyCPU;x64</Platforms>-->
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Optimize>false</Optimize>
-		<RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
-		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-		<DebugType>pdbonly</DebugType>
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Copyright>Copyright © FLYINGHOLDING N.V. $([System.DateTime]::Now.ToString(yyyy))</Copyright>
+    <Company>FLYINGHOLDING N.V.</Company>
+    <Authors>Frederic Wauquier</Authors>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <LangVersion>default</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Optimize>false</Optimize>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <DebugType>pdbonly</DebugType>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<!--<DefineConstants></DefineConstants>-->
-		<Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_UtcNow().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
-		<Revision>$([MSBuild]::Divide($([System.DateTime]::get_UtcNow().get_TimeOfDay().get_totalseconds()), 2).ToString('F0'))</Revision>
-		<VersionPrefix>$([System.DateTime]::Now.ToString(yyyy.MM))</VersionPrefix>
-		<VersionSuffix>$(Build).$(Revision)</VersionSuffix>
-		<Version>$(VersionPrefix).$(VersionSuffix)</Version>
-		<AssemblyVersion>$(VersionPrefix).$(VersionSuffix)</AssemblyVersion>
-		<FileVersion>$(VersionPrefix).$(VersionSuffix)</FileVersion>
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
-		<Optimize>true</Optimize>
-		<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-		<EnableNETAnalyzers>false</EnableNETAnalyzers>
-		<DebugType>none</DebugType>
-		<GenerateDocumentationFile>False</GenerateDocumentationFile>
-		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <!--<DefineConstants></DefineConstants>-->
+    <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_UtcNow().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
+    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_UtcNow().get_TimeOfDay().get_totalseconds()), 2).ToString('F0'))</Revision>
+    <VersionPrefix>$([System.DateTime]::Now.ToString(yyyy.MM))</VersionPrefix>
+    <VersionSuffix>$(Build).$(Revision)</VersionSuffix>
+    <Version>$(VersionPrefix).$(VersionSuffix)</Version>
+    <AssemblyVersion>$(VersionPrefix).$(VersionSuffix)</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).$(VersionSuffix)</FileVersion>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <Optimize>true</Optimize>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultItemExcludesInProjectFolder>$(DefaultItemExcludesInProjectFolder);**/*.cmd;**/*.bak;**/*.DotSettings;**/*.edmx;**/*.lnk;**/*.log</DefaultItemExcludesInProjectFolder>
+  </PropertyGroup>
+
+  <!--Package References for Code Analysis Tools-->
+  <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <!--    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.8.14">-->
+    <!--      <PrivateAssets>all</PrivateAssets>-->
+    <!--      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
+    <!--    </PackageReference>-->
 
 
-	<ItemGroup>
-		<None Remove="_build.cmd"/>
-		<None Remove="*.cmd"/>
-		<None Remove="*.DotSettings"/>
-		<None Remove="*.edmx"/>
-		<None Remove="*.bak"/>
-	</ItemGroup>
-
-
-	<!--<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-		--><!-- Package References for Code Analysis Tools--><!--
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-
-		<PackageReference Include="Roslynator.Analyzers" Version="4.7.0">
-			<PrivateAssets>none</PrivateAssets>
-		</PackageReference>
-
-		<PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.7.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.7.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>-->
+  </ItemGroup>
 
 
 </Project>

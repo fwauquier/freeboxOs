@@ -1,0 +1,24 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">SOLUTION</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=06524f8f_002D7e7f_002D4c6c_002Daab9_002Da2ec53ebc7d0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LanBrowserHostAsync_AdditionalProperties" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiVersionTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.Study.mac_filter&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiLanTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.Study&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiStorageTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiWifiTests.WifiMacFilter&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiConnectionTests.ConnectionConfig&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiWifiTests.WifiAp_0&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiWifiTests.WifiBss&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests.ApiWifiTests.WifiAccessPoint&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d7428b6a_002D02f8_002D4a8d_002Dbe78_002D89f1f5140f83/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GoodLogin" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiLoginTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiLanTests.LanBrowserInterfacesAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::6EAF0054-E14F-428C-8219-E14F54AC4B36::net8.0::FreeboxOs.ApiLanTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
